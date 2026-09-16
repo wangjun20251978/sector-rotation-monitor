@@ -1,0 +1,171 @@
+{
+  "trade_date": "2026-09-16",
+  "updated_at": "2026-09-16 20:30:00 (CST)",
+  "_stale": true,
+  "_note": "兜底快照：数据来自 2026-09-16 收盘的公开行情与财经媒体报道，用于接口全部不可用时保证页面不空白。",
+  "indices": {
+    "上证指数": {
+      "price": 3891.6,
+      "chg_pct": 0.71,
+      "chg": 27.32
+    },
+    "深证成指": {
+      "price": 13454.74,
+      "chg_pct": 1.26,
+      "chg": 166.77
+    },
+    "创业板指": {
+      "price": 3311.47,
+      "chg_pct": 1.96,
+      "chg": 63.55
+    },
+    "科创50": {
+      "price": 1616.19,
+      "chg_pct": 4.14,
+      "chg": 64.23
+    },
+    "沪深300": {
+      "price": 4480.27,
+      "chg_pct": 0.68,
+      "chg": 30.23
+    },
+    "北证50": {
+      "price": 1040.29,
+      "chg_pct": 1.15,
+      "chg": 11.78
+    }
+  },
+  "style": {
+    "大盘价值": {
+      "price": 8040.57,
+      "chg_pct": -0.79
+    },
+    "小盘成长": {
+      "price": 6446.0,
+      "chg_pct": 1.65
+    },
+    "国证成长": {
+      "price": 5092.9,
+      "chg_pct": 1.57
+    },
+    "中证红利": {
+      "price": 5503.7,
+      "chg_pct": -0.55
+    },
+    "中证1000": {
+      "price": 7587.43,
+      "chg_pct": 2.01
+    },
+    "国证2000": {
+      "price": null,
+      "chg_pct": 2.04
+    },
+    "科创50": {
+      "price": 1616.19,
+      "chg_pct": 4.14
+    },
+    "沪深300": {
+      "price": 4480.27,
+      "chg_pct": 0.68
+    }
+  },
+  "sectors": [
+    {
+      "name": "通信",
+      "chg_pct": 4.37,
+      "net_inflow": 9992803984.0,
+      "amount": null
+    },
+    {
+      "name": "电子",
+      "chg_pct": 3.53,
+      "net_inflow": 19560597243.0,
+      "amount": null
+    },
+    {
+      "name": "有色金属",
+      "chg_pct": 1.71,
+      "net_inflow": 1880786392.0,
+      "amount": null
+    },
+    {
+      "name": "机械设备",
+      "chg_pct": 1.34,
+      "net_inflow": 2360791893.0,
+      "amount": null
+    },
+    {
+      "name": "基础化工",
+      "chg_pct": 1.12,
+      "net_inflow": 890859736.0,
+      "amount": null
+    },
+    {
+      "name": "房地产",
+      "chg_pct": 0.97,
+      "net_inflow": 271749232.0,
+      "amount": null
+    },
+    {
+      "name": "医药生物",
+      "chg_pct": 0.49,
+      "net_inflow": -525533888.0,
+      "amount": null
+    },
+    {
+      "name": "非银金融",
+      "chg_pct": 0.2,
+      "net_inflow": -268346247.0,
+      "amount": null
+    },
+    {
+      "name": "煤炭",
+      "chg_pct": -0.26,
+      "net_inflow": -124595894.0,
+      "amount": null
+    },
+    {
+      "name": "汽车",
+      "chg_pct": -0.34,
+      "net_inflow": -1543626163.0,
+      "amount": null
+    },
+    {
+      "name": "食品饮料",
+      "chg_pct": -0.36,
+      "net_inflow": -80639341.0,
+      "amount": null
+    },
+    {
+      "name": "银行",
+      "chg_pct": -0.48,
+      "net_inflow": -489870192.0,
+      "amount": null
+    },
+    {
+      "name": "交通运输",
+      "chg_pct": -0.6,
+      "net_inflow": -526634732.0,
+      "amount": null
+    },
+    {
+      "name": "家用电器",
+      "chg_pct": -0.85,
+      "net_inflow": 113523016.0,
+      "amount": null
+    },
+    {
+      "name": "计算机",
+      "chg_pct": 0.73,
+      "net_inflow": -793178718.0,
+      "amount": null
+    },
+    {
+      "name": "国防军工",
+      "chg_pct": 0.73,
+      "net_inflow": -1270122154.0,
+      "amount": null
+    }
+  ],
+  "source": "兜底快照（2026-09-16 收盘公开数据）"
+}

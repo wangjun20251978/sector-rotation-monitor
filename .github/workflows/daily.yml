@@ -1,0 +1,44 @@
+name: 每日更新 A股行业轮动看板
+
+on:
+  schedule:
+    # 每个交易日 15:40（北京时间）= 07:40 UTC，收盘后 10 分钟，等数据结算
+    # GitHub Actions 的 cron 用 UTC。cron 里写 0-6 代表周日到周六，
+    # 这里 40 7 * * 1-5 表示 UTC 周一至周五 07:40（即北京周一至周五 15:40）
+    - cron: "40 7 * * 1-5"
+  workflow_dispatch: {}   # 支持在 GitHub 网页上手动点一下触发
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sector-monitor-daily
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 抓取行情并生成页面
+        run: |
+          python scripts/build.py
+
+      - name: 提交更新
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          if git diff --staged --quiet; then
+            echo "无变化，跳过提交"
+          else
+            git commit -m "chore: 更新行业轮动看板 $(date -u -d '+8 hours' +'%Y-%m-%d')"
+            git push
+          fi
