@@ -228,10 +228,57 @@ def get_indices(secids):
     return get_indices_tx([n for n, _ in secids])
 
 
-def get_sector_board():
-    """拉东财行业板块（t:2）全部数据：涨跌幅 + 主力净流入 + 成交额。
-    采用小页尺寸分页拉取，降低单次请求体量，规避接口限流。
+def get_sector_board_tx():
+    """腾讯申万一级行业板块（主数据源）。
+
+    接口对海外 IP 友好，一次返回全部 31 个申万一级行业，字段包含：
+      name      行业名
+      zdf       当日涨跌幅(%)
+      zdf_d5    近5日涨跌幅(%)
+      zdf_d20   近20日涨跌幅(%)
+      zljlr     当日主力净流入(万元)
+      zljlr_d5  近5日主力净流入(万元)
+      turnover  成交额
     """
+    url = ("https://proxy.finance.qq.com/cgi/cgi-bin/rank/pt/getRank"
+           "?board_type=hy&sort_type=price&direct=down&offset=0&count=100")
+    js = fetch(url, referer="https://gu.qq.com/", base_delay=2.0)
+    if not js:
+        return []
+    rl = (js.get("data") or {}).get("rank_list") or []
+    out = []
+    for x in rl:
+        name = x.get("name")
+        if not name:
+            continue
+        out.append({
+            "name": name,
+            "chg_pct": safe_num(x.get("zdf")),
+            "chg_5d": safe_num(x.get("zdf_d5")),
+            "chg_20d": safe_num(x.get("zdf_d20")),
+            # 万元 -> 元
+            "net_inflow": (safe_num(x.get("zljlr"), 0.0) or 0.0) * 1e4,
+            "net_inflow_5d": (safe_num(x.get("zljlr_d5"), 0.0) or 0.0) * 1e4,
+            "amount": safe_num(x.get("turnover")),
+            "leader": (x.get("lzg") or {}).get("name"),
+            "leader_chg": safe_num((x.get("lzg") or {}).get("zdf")),
+        })
+    return out
+
+
+def get_sector_board():
+    """行业板块数据：优先腾讯（海外可达），失败再试东财。"""
+    rows = get_sector_board_tx()
+    if rows:
+        print(f"      数据源：腾讯行情，行业数 {len(rows)}")
+        return rows, "tencent"
+    print("  [info] 腾讯行业接口不可用，降级尝试东财 ...", file=sys.stderr)
+    rows = get_sector_board_em()
+    return rows, "eastmoney"
+
+
+def get_sector_board_em():
+    """东财行业板块（备份源）：小页分页，降低单次请求体量。"""
     rows = []
     page = 1
     page_size = 50
@@ -239,16 +286,60 @@ def get_sector_board():
     while page <= max_pages:
         url = ("https://push2.eastmoney.com/api/qt/clist/get?pn=%d&pz=%d&po=1&np=1"
                "&fltt=2&invt=2&fid=f3&fs=m:90+t:2&fields=f12,f13,f14,f3,f62,f6" % (page, page_size))
-        js = fetch(url, retries=2, referer="https://data.eastmoney.com/")
+        js = fetch(url, retries=2, referer="https://data.eastmoney.com/", base_delay=2.0)
         if not js or not js.get("data") or not js["data"].get("diff"):
             break
         chunk = js["data"]["diff"]
-        rows.extend(chunk)
+        for x in chunk:
+            nm = x.get("f14")
+            if not nm:
+                continue
+            rows.append({
+                "name": nm,
+                "chg_pct": safe_num(x.get("f3")),
+                "chg_5d": None,
+                "chg_20d": None,
+                "net_inflow": safe_num(x.get("f62"), 0.0) or 0.0,
+                "net_inflow_5d": None,
+                "amount": safe_num(x.get("f6")),
+                "leader": None,
+                "leader_chg": None,
+            })
         total = js["data"].get("total") or 0
         if len(chunk) < page_size or len(rows) >= total:
             break
         page += 1
-    return rows
+    # 东财返回的是细分板块，聚合到申万一级
+    return aggregate_em_rows(rows)
+
+
+def aggregate_em_rows(rows):
+    """把东财细分板块按申万一级聚合。"""
+    agg = {}
+    for r in rows:
+        name = r["name"]
+        for sw, aliases in SW_MAP.items():
+            if name == sw or name in aliases:
+                d = agg.setdefault(sw, {"chg": [], "net": 0.0, "w": 0.0})
+                amt = r.get("amount") or 0
+                w = amt if amt > 0 else 1.0
+                if r.get("chg_pct") is not None:
+                    d["chg"].append((r["chg_pct"], w))
+                d["net"] += r.get("net_inflow") or 0.0
+                d["w"] += w
+                break
+    out = []
+    for sw, d in agg.items():
+        chg = None
+        if d["chg"]:
+            tot = sum(w for _, w in d["chg"])
+            chg = round(sum(c * w for c, w in d["chg"]) / tot, 2) if tot else None
+        out.append({
+            "name": sw, "chg_pct": chg, "chg_5d": None, "chg_20d": None,
+            "net_inflow": d["net"], "net_inflow_5d": None,
+            "amount": None, "leader": None, "leader_chg": None,
+        })
+    return out
 
 
 def aggregate_to_sw(boards):
@@ -317,22 +408,16 @@ def build_dataset():
     style_idx = get_indices(STYLE_INDICES)
 
     print("[2/4] 拉取行业板块（涨跌 + 资金流）...")
-    boards = get_sector_board()
-    print(f"      东财板块数：{len(boards)}")
+    boards, src = get_sector_board()
 
-    print("[3/4] 聚合到申万一级口径 ...")
-    sw = aggregate_to_sw(boards)
+    print(f"[3/4] 整理到申万一级口径（源：{src}）...")
+    by_name = {b["name"]: b for b in boards}
     sectors = []
     for name in DISPLAY_SECTORS:
-        d = sw.get(name)
+        d = by_name.get(name)
         if not d:
             continue
-        sectors.append({
-            "name": name,
-            "chg_pct": d["chg_pct"],
-            "net_inflow": d["net"],
-            "amount": d["amt"],
-        })
+        sectors.append(d)
     sectors.sort(key=lambda x: (x["chg_pct"] is None, -(x["chg_pct"] or 0)))
 
     print("[4/4] 组包 ...")
@@ -343,7 +428,9 @@ def build_dataset():
         "indices": {k: v for k, v in main_idx.items()},
         "style": {k: v for k, v in style_idx.items()},
         "sectors": sectors,
-        "source": "东方财富公开行情接口（push2.eastmoney.com）",
+        "source": ("腾讯财经行情接口（proxy.finance.qq.com）" if src == "tencent"
+                   else "东方财富公开行情接口（push2.eastmoney.com）"),
+        "_data_source_key": src,
     }
     return ds
 
