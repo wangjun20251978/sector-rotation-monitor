@@ -97,6 +97,10 @@ MAIN_INDICES = [
 
 _LAST_CALL = [0.0]
 
+# 数据源回传的真实交易日（YYYY-MM-DD）。腾讯行情第 30 个字段是数据时间戳，
+# 用它作为 trade_date，可自动处理周末/节假日/盘前等情况——比读本机时钟可靠。
+_DATA_DATE = [None]
+
 
 def fetch(url, retries=3, referer="https://quote.eastmoney.com/", base_delay=3.0, encoding="utf-8"):
     """带重试与全局限流的 GET，返回解析后的 JSON。
@@ -209,6 +213,11 @@ def get_indices_tx(names):
             prev = safe_num(parts[4])
             chg = safe_num(parts[31])
             chg_pct = safe_num(parts[32])
+            # parts[30] 形如 20260918161402 —— 数据源回传的行情时间戳
+            if _DATA_DATE[0] is None and len(parts) > 30:
+                ts = (parts[30] or "").strip()
+                if len(ts) >= 8 and ts[:8].isdigit():
+                    _DATA_DATE[0] = f"{ts[:4]}-{ts[4:6]}-{ts[6:8]}"
             if name and price is not None:
                 out[name] = {"price": price, "chg": chg, "chg_pct": chg_pct,
                              "_prev": prev, "_src": "tencent"}
@@ -402,6 +411,24 @@ def safe_num(v, default=None):
         return default
 
 
+def guess_trade_date(now):
+    """兜底：按日历推算最近交易日（跳过周六周日）。
+
+    仅在拿不到数据源时间戳时使用；不覆盖法定节假日，
+    因此优先级低于 _DATA_DATE。
+    """
+    d = now
+    # 周六 -> 周五；周日 -> 周五
+    while d.weekday() >= 5:
+        d = d - timedelta(days=1)
+    # 交易日盘前（15:00 前）当日行情尚未产生，取上一交易日
+    if d.weekday() < 5 and now.hour < 15:
+        d = d - timedelta(days=1)
+        while d.weekday() >= 5:
+            d = d - timedelta(days=1)
+    return d.strftime("%Y-%m-%d")
+
+
 def build_dataset():
     print("[1/4] 拉取指数行情 ...")
     main_idx = get_indices(MAIN_INDICES)
@@ -422,9 +449,12 @@ def build_dataset():
 
     print("[4/4] 组包 ...")
     now = datetime.now(CST)
+    # 优先用数据源回传的行情日期（可自动处理周末/节假/盘前），取不到再按日历推算
+    trade_date = _DATA_DATE[0] or guess_trade_date(now)
     ds = {
-        "trade_date": now.strftime("%Y-%m-%d"),
+        "trade_date": trade_date,
         "updated_at": now.strftime("%Y-%m-%d %H:%M:%S") + " (CST)",
+        "_trade_date_src": "datasource" if _DATA_DATE[0] else "calendar",
         "indices": {k: v for k, v in main_idx.items()},
         "style": {k: v for k, v in style_idx.items()},
         "sectors": sectors,
@@ -496,6 +526,12 @@ def render_html(ds):
     idx = ds["indices"]
     style = ds["style"]
     sectors = ds["sectors"]
+
+    # 数据日期可能是"最近交易日"（周末 / 盘前刷新时，与页面生成日期不同天），
+    # 此时在日期后加标注，避免读者误以为数据是当天的。
+    is_fresh_day = ds["trade_date"] == ds["updated_at"][:10]
+    date_tag = "" if is_fresh_day else "（最近交易日）"
+    lead_tag = "今日主线" if is_fresh_day else "最近交易日主线"
 
     # ---- 指数条 ----
     idx_order = ["上证指数", "深证成指", "创业板指", "科创50", "沪深300", "北证50"]
@@ -743,7 +779,7 @@ def render_html(ds):
     </div>
     <div class="meta">
       <span class="live"><span class="dot"></span>数据已结算</span>
-      <span class="stamp">数据日期 {ds["trade_date"]} · 更新于 {ds["updated_at"]}</span>
+      <span class="stamp">数据日期 {ds["trade_date"]}{date_tag} · 更新于 {ds["updated_at"]}</span>
     </div>
   </header>
 
@@ -752,7 +788,7 @@ def render_html(ds):
   </div>
 
   <div class="lead">
-    <span class="tag">今日主线</span>
+    <span class="tag">{lead_tag}</span>
     行业涨幅前三：<b class="up">{lead_ok}</b>；跌幅前三：<b class="down">{lead_bad}</b>。
     主力资金净流入前三（{ "、".join(s["name"] for s in inflow_top) }）合计 <b class="up">+{inflow_sum:,.1f}亿</b>；
     净流出前三：<b class="down">{ "、".join(s["name"] for s in outflow_top) }</b>。
@@ -820,7 +856,7 @@ def render_html(ds):
   <div class="panel">
     <div class="ph">
       <h2><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/></svg>数据来源与说明</h2>
-      <span class="hint">数据日期 {ds["trade_date"]}</span>
+      <span class="hint">数据日期 {ds["trade_date"]}{date_tag}</span>
     </div>
     <div class="srcgrid">
       <div class="srccard"><div class="t">数据来源</div><div class="d">{ds["source"]}<br>行业涨跌幅按板块成交额加权聚合到申万一级口径；主力资金净额为同口径求和。</div></div>
@@ -835,7 +871,7 @@ def render_html(ds):
 
   <footer>
     <span class="mono">SECTOR ROTATION &amp; CAPITAL FLOW TERMINAL</span>
-    <span class="mono">自动生成 · 数据日期 {ds["trade_date"]} · 更新 {ds["updated_at"]}</span>
+    <span class="mono">自动生成 · 数据日期 {ds["trade_date"]}{date_tag} · 更新 {ds["updated_at"]}</span>
   </footer>
 </div>
 </body>
