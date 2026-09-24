@@ -1,279 +1,271 @@
 {
-  "trade_date": "2026-09-23",
-  "updated_at": "2026-09-23 21:00:58 (CST)",
-  "_trade_date_src": "datasource",
+  "trade_date": "2026-09-24",
+  "updated_at": "2026-09-24 20:54:09 (CST)",
+  "_trade_date_src": "calendar",
   "indices": {
     "上证指数": {
-      "price": 3936.52,
-      "chg_pct": -0.39,
-      "chg": -15.61,
+      "price": 3888.37,
+      "chg_pct": -1.22,
+      "chg": -48.15,
       "_src": "eastmoney"
     },
     "深证成指": {
-      "price": 13636.07,
-      "chg_pct": -0.64,
-      "chg": -87.67,
+      "price": 13316.97,
+      "chg_pct": -2.34,
+      "chg": -319.1,
       "_src": "eastmoney"
     },
     "创业板指": {
-      "price": 3379.61,
-      "chg_pct": -0.6,
-      "chg": -20.32,
+      "price": 3288.95,
+      "chg_pct": -2.68,
+      "chg": -90.66,
       "_src": "eastmoney"
     },
     "科创50": {
-      "price": 1660.85,
-      "chg_pct": -0.25,
-      "chg": -4.19,
+      "price": 1621.87,
+      "chg_pct": -2.35,
+      "chg": -38.98,
       "_src": "eastmoney"
     },
     "沪深300": {
-      "price": 4517.28,
-      "chg_pct": -0.6,
-      "chg": -27.31,
+      "price": 4439.14,
+      "chg_pct": -1.73,
+      "chg": -78.14,
       "_src": "eastmoney"
     },
     "北证50": {
-      "price": 1074.04,
-      "chg_pct": 2.6,
-      "chg": 27.24,
+      "price": 1055.74,
+      "chg_pct": -1.7,
+      "chg": -18.3,
       "_src": "eastmoney"
     }
   },
   "style": {
     "大盘价值": {
-      "price": 8010.23,
-      "chg": -46.23,
-      "chg_pct": -0.57,
-      "_prev": 8056.46,
-      "_src": "tencent"
+      "price": 8006.27,
+      "chg_pct": -0.05,
+      "chg": -3.96,
+      "_src": "eastmoney"
     },
     "小盘成长": {
-      "price": 6602.9,
-      "chg": -18.86,
-      "chg_pct": -0.28,
-      "_prev": 6621.76,
-      "_src": "tencent"
+      "price": 6466.53,
+      "chg_pct": -2.07,
+      "chg": -136.37,
+      "_src": "eastmoney"
     },
     "国证成长": {
-      "price": 5164.5,
-      "chg": -27.91,
-      "chg_pct": -0.54,
-      "_prev": 5192.41,
-      "_src": "tencent"
+      "price": 5039.86,
+      "chg_pct": -2.41,
+      "chg": -124.64,
+      "_src": "eastmoney"
     },
     "中证红利": {
-      "price": 5484.03,
-      "chg": -43.94,
-      "chg_pct": -0.79,
-      "_prev": 5527.97,
-      "_src": "tencent"
+      "price": 5469.4,
+      "chg_pct": -0.27,
+      "chg": -14.63,
+      "_src": "eastmoney"
     },
     "中证1000": {
-      "price": 7745.56,
-      "chg": -13.47,
-      "chg_pct": -0.17,
-      "_prev": 7759.03,
-      "_src": "tencent"
+      "price": 7570.14,
+      "chg_pct": -2.26,
+      "chg": -175.42,
+      "_src": "eastmoney"
     },
     "国证2000": {
-      "price": 10199.67,
-      "chg": -8.19,
-      "chg_pct": -0.08,
-      "_prev": 10207.86,
-      "_src": "tencent"
+      "price": 9988.6,
+      "chg_pct": -2.07,
+      "chg": -211.07,
+      "_src": "eastmoney"
     },
     "科创50": {
-      "price": 1660.85,
-      "chg": -4.19,
-      "chg_pct": -0.25,
-      "_prev": 1665.04,
-      "_src": "tencent"
+      "price": 1621.87,
+      "chg_pct": -2.35,
+      "chg": -38.98,
+      "_src": "eastmoney"
     },
     "沪深300": {
-      "price": 4517.28,
-      "chg": -27.31,
-      "chg_pct": -0.6,
-      "_prev": 4544.59,
-      "_src": "tencent"
+      "price": 4439.14,
+      "chg_pct": -1.73,
+      "chg": -78.14,
+      "_src": "eastmoney"
     }
   },
   "sectors": [
     {
-      "name": "电子",
-      "chg_pct": 0.19,
-      "chg_5d": 3.6,
-      "chg_20d": 5.71,
-      "net_inflow": -5121868400.0,
-      "net_inflow_5d": -4057173500.0,
-      "amount": 49384650.0,
-      "leader": "慧智微-U",
-      "leader_chg": 20.03
-    },
-    {
-      "name": "医药生物",
-      "chg_pct": 0.17,
-      "chg_5d": 5.69,
-      "chg_20d": 1.09,
-      "net_inflow": -3869870000.0,
-      "net_inflow_5d": 2159352600.0,
-      "amount": 13184205.0,
-      "leader": "浩欧博",
-      "leader_chg": 20.0
-    },
-    {
-      "name": "机械设备",
-      "chg_pct": 0.15,
-      "chg_5d": 1.59,
-      "chg_20d": 0.55,
-      "net_inflow": -895780000.0,
-      "net_inflow_5d": -812224800.0,
-      "amount": 13626735.0,
-      "leader": "莱伯泰科",
-      "leader_chg": 20.0
-    },
-    {
-      "name": "基础化工",
-      "chg_pct": 0.08,
-      "chg_5d": 1.59,
-      "chg_20d": 0.51,
-      "net_inflow": -195406800.0,
-      "net_inflow_5d": -4628211400.0,
-      "amount": 9961124.0,
-      "leader": "海正生材",
-      "leader_chg": 16.38
-    },
-    {
-      "name": "房地产",
-      "chg_pct": 0.02,
-      "chg_5d": 8.47,
-      "chg_20d": 4.97,
-      "net_inflow": 1019199800.0,
-      "net_inflow_5d": 2746423200.0,
-      "amount": 3124766.0,
-      "leader": "华远控股",
-      "leader_chg": 10.16
-    },
-    {
-      "name": "食品饮料",
-      "chg_pct": -0.06,
-      "chg_5d": 1.11,
-      "chg_20d": -2.2,
-      "net_inflow": 721514200.0,
-      "net_inflow_5d": 59790900.0,
-      "amount": 3069604.0,
-      "leader": "ST加加",
-      "leader_chg": 6.29
+      "name": "银行",
+      "chg_pct": 0.31,
+      "chg_5d": -0.14,
+      "chg_20d": 2.09,
+      "net_inflow": 117961200.00000001,
+      "net_inflow_5d": -497920300.0,
+      "amount": 2439946.0,
+      "leader": "重庆银行",
+      "leader_chg": 2.04
     },
     {
       "name": "家用电器",
-      "chg_pct": -0.11,
-      "chg_5d": 0.01,
-      "chg_20d": -2.63,
-      "net_inflow": 29270600.0,
-      "net_inflow_5d": -593040000.0,
-      "amount": 1690048.0,
-      "leader": "宏昌科技",
-      "leader_chg": 12.22
-    },
-    {
-      "name": "银行",
-      "chg_pct": -0.47,
-      "chg_5d": -0.71,
-      "chg_20d": 0.72,
-      "net_inflow": -1049601600.0,
-      "net_inflow_5d": -1620458500.0,
-      "amount": 1916972.0,
-      "leader": "齐鲁银行",
-      "leader_chg": 0.88
-    },
-    {
-      "name": "汽车",
-      "chg_pct": -0.51,
-      "chg_5d": 2.98,
-      "chg_20d": -1.11,
-      "net_inflow": 309170300.0,
-      "net_inflow_5d": 3832489500.0,
-      "amount": 5355986.0,
-      "leader": "盛帮股份",
-      "leader_chg": 10.37
-    },
-    {
-      "name": "电力设备",
-      "chg_pct": -0.56,
-      "chg_5d": 0.57,
-      "chg_20d": -8.42,
-      "net_inflow": -1092918300.0,
-      "net_inflow_5d": -4651542400.0,
-      "amount": 12078833.0,
-      "leader": "中一科技",
-      "leader_chg": 20.0
-    },
-    {
-      "name": "非银金融",
-      "chg_pct": -0.74,
-      "chg_5d": 0.9,
-      "chg_20d": -2.95,
-      "net_inflow": -1713339600.0,
-      "net_inflow_5d": -1135901500.0,
-      "amount": 2328976.0,
-      "leader": "中金公司",
-      "leader_chg": 2.67
+      "chg_pct": 0.01,
+      "chg_5d": -0.15,
+      "chg_20d": -2.03,
+      "net_inflow": 622643900.0,
+      "net_inflow_5d": 265471500.0,
+      "amount": 1728312.0,
+      "leader": "奥佳华",
+      "leader_chg": 10.04
     },
     {
       "name": "交通运输",
-      "chg_pct": -0.74,
-      "chg_5d": 0.62,
-      "chg_20d": -0.94,
-      "net_inflow": -643929000.0,
-      "net_inflow_5d": -1002997000.0,
-      "amount": 1828329.0,
-      "leader": "ST海钦",
-      "leader_chg": 8.41
-    },
-    {
-      "name": "有色金属",
-      "chg_pct": -0.78,
-      "chg_5d": -1.78,
-      "chg_20d": -6.82,
-      "net_inflow": -3091646100.0,
-      "net_inflow_5d": -9424292500.0,
-      "amount": 6524000.0,
-      "leader": "丽岛新材",
+      "chg_pct": -0.43,
+      "chg_5d": -0.69,
+      "chg_20d": -1.08,
+      "net_inflow": -66608600.0,
+      "net_inflow_5d": -1693966099.9999998,
+      "amount": 1933053.0,
+      "leader": "三羊马",
       "leader_chg": 10.01
     },
     {
-      "name": "通信",
-      "chg_pct": -0.92,
-      "chg_5d": 2.53,
-      "chg_20d": 8.06,
-      "net_inflow": -6664464300.000001,
-      "net_inflow_5d": -5831083900.0,
-      "amount": 12287537.0,
-      "leader": "瑞斯康达",
-      "leader_chg": 10.0
+      "name": "汽车",
+      "chg_pct": -1.11,
+      "chg_5d": 0.21,
+      "chg_20d": -2.85,
+      "net_inflow": 706672700.0,
+      "net_inflow_5d": 898272899.9999999,
+      "amount": 5677414.0,
+      "leader": "众捷股份",
+      "leader_chg": 10.98
+    },
+    {
+      "name": "食品饮料",
+      "chg_pct": -1.3,
+      "chg_5d": -0.49,
+      "chg_20d": -3.01,
+      "net_inflow": -1349681400.0000002,
+      "net_inflow_5d": -709580399.9999999,
+      "amount": 2383069.0,
+      "leader": "泉阳泉",
+      "leader_chg": 10.04
     },
     {
       "name": "国防军工",
-      "chg_pct": -1.34,
-      "chg_5d": 0.68,
-      "chg_20d": 5.32,
-      "net_inflow": -1684252300.0,
-      "net_inflow_5d": -5037427800.0,
-      "amount": 3910828.0,
-      "leader": "高凌信息",
-      "leader_chg": 15.28
+      "chg_pct": -1.4,
+      "chg_5d": -0.47,
+      "chg_20d": 1.89,
+      "net_inflow": 1097738000.0,
+      "net_inflow_5d": -2617845500.0,
+      "amount": 4438623.0,
+      "leader": "霍莱沃",
+      "leader_chg": 19.99
+    },
+    {
+      "name": "非银金融",
+      "chg_pct": -1.67,
+      "chg_5d": 0.06,
+      "chg_20d": -5.14,
+      "net_inflow": -2356909400.0,
+      "net_inflow_5d": -1758500400.0,
+      "amount": 2668382.0,
+      "leader": "江苏金租",
+      "leader_chg": 1.8
     },
     {
       "name": "计算机",
-      "chg_pct": -1.42,
-      "chg_5d": 2.56,
-      "chg_20d": 0.66,
-      "net_inflow": -5715885300.0,
-      "net_inflow_5d": -1750430700.0,
-      "amount": 8646784.0,
-      "leader": "安居宝",
-      "leader_chg": 11.95
+      "chg_pct": -1.73,
+      "chg_5d": 1.43,
+      "chg_20d": -3.16,
+      "net_inflow": -3383062900.0,
+      "net_inflow_5d": -2283123100.0,
+      "amount": 6880611.0,
+      "leader": "海峡创新",
+      "leader_chg": 19.98
+    },
+    {
+      "name": "机械设备",
+      "chg_pct": -1.83,
+      "chg_5d": -0.16,
+      "chg_20d": -3.56,
+      "net_inflow": -1523331000.0,
+      "net_inflow_5d": -1493194400.0,
+      "amount": 13852733.0,
+      "leader": "昆船智能",
+      "leader_chg": 20.03
+    },
+    {
+      "name": "电力设备",
+      "chg_pct": -1.95,
+      "chg_5d": -0.88,
+      "chg_20d": -9.56,
+      "net_inflow": -3424727199.9999995,
+      "net_inflow_5d": -5206542200.0,
+      "amount": 11592976.0,
+      "leader": "洛轴股份",
+      "leader_chg": 19.99
+    },
+    {
+      "name": "基础化工",
+      "chg_pct": -1.95,
+      "chg_5d": 0.33,
+      "chg_20d": -3.75,
+      "net_inflow": -2618018100.0,
+      "net_inflow_5d": -4465344700.0,
+      "amount": 9379099.0,
+      "leader": "中农立华",
+      "leader_chg": 10.04
+    },
+    {
+      "name": "房地产",
+      "chg_pct": -2.31,
+      "chg_5d": 5.74,
+      "chg_20d": 2.1,
+      "net_inflow": -1244808000.0,
+      "net_inflow_5d": 1651622700.0,
+      "amount": 2358567.0,
+      "leader": "荣丰控股",
+      "leader_chg": 5.22
+    },
+    {
+      "name": "医药生物",
+      "chg_pct": -2.56,
+      "chg_5d": 2.36,
+      "chg_20d": -2.28,
+      "net_inflow": -6643328500.0,
+      "net_inflow_5d": -5869001100.0,
+      "amount": 11884349.0,
+      "leader": "华神科技",
+      "leader_chg": 10.12
+    },
+    {
+      "name": "通信",
+      "chg_pct": -2.74,
+      "chg_5d": -0.51,
+      "chg_20d": 1.65,
+      "net_inflow": -9790252500.0,
+      "net_inflow_5d": -14177214000.0,
+      "amount": 11375598.0,
+      "leader": "华脉科技",
+      "leader_chg": 9.98
+    },
+    {
+      "name": "电子",
+      "chg_pct": -2.92,
+      "chg_5d": 1.24,
+      "chg_20d": -1.62,
+      "net_inflow": -22516083300.0,
+      "net_inflow_5d": -14286690200.0,
+      "amount": 44770437.0,
+      "leader": "超频三",
+      "leader_chg": 11.81
+    },
+    {
+      "name": "有色金属",
+      "chg_pct": -3.53,
+      "chg_5d": -2.78,
+      "chg_20d": -11.54,
+      "net_inflow": -7457568700.0,
+      "net_inflow_5d": -10427533400.0,
+      "amount": 7537249.0,
+      "leader": "丽岛新材",
+      "leader_chg": 4.47
     }
   ],
   "source": "腾讯财经行情接口（proxy.finance.qq.com）",
