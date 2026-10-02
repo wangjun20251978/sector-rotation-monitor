@@ -1,107 +1,93 @@
 {
-  "trade_date": "2026-09-30",
-  "updated_at": "2026-10-01 22:47:51 (CST)",
-  "_trade_date_src": "datasource",
+  "trade_date": "2026-10-02",
+  "updated_at": "2026-10-02 22:08:52 (CST)",
+  "_trade_date_src": "calendar",
   "indices": {
     "上证指数": {
       "price": 3842.19,
-      "chg": 11.74,
       "chg_pct": 0.31,
-      "_prev": 3830.45,
-      "_src": "tencent"
+      "chg": 11.74,
+      "_src": "eastmoney"
     },
     "深证成指": {
       "price": 12887.62,
-      "chg": -14.33,
       "chg_pct": -0.11,
-      "_prev": 12901.95,
-      "_src": "tencent"
+      "chg": -14.33,
+      "_src": "eastmoney"
     },
     "创业板指": {
       "price": 3135.28,
-      "chg": -7.28,
       "chg_pct": -0.23,
-      "_prev": 3142.56,
-      "_src": "tencent"
+      "chg": -7.28,
+      "_src": "eastmoney"
     },
     "科创50": {
       "price": 1530.01,
-      "chg": -39.33,
       "chg_pct": -2.51,
-      "_prev": 1569.34,
-      "_src": "tencent"
+      "chg": -39.33,
+      "_src": "eastmoney"
     },
     "沪深300": {
       "price": 4357.62,
-      "chg": 12.41,
       "chg_pct": 0.29,
-      "_prev": 4345.21,
-      "_src": "tencent"
+      "chg": 12.41,
+      "_src": "eastmoney"
     },
     "北证50": {
       "price": 1039.61,
-      "chg": 7.25,
       "chg_pct": 0.7,
-      "_prev": 1032.36,
-      "_src": "tencent"
+      "chg": 7.25,
+      "_src": "eastmoney"
     }
   },
   "style": {
     "大盘价值": {
       "price": 8065.45,
-      "chg": 79.28,
       "chg_pct": 0.99,
-      "_prev": 7986.17,
-      "_src": "tencent"
+      "chg": 79.28,
+      "_src": "eastmoney"
     },
     "小盘成长": {
       "price": 6288.57,
-      "chg": -23.91,
       "chg_pct": -0.38,
-      "_prev": 6312.48,
-      "_src": "tencent"
+      "chg": -23.91,
+      "_src": "eastmoney"
     },
     "国证成长": {
       "price": 4886.82,
-      "chg": -5.72,
       "chg_pct": -0.12,
-      "_prev": 4892.54,
-      "_src": "tencent"
+      "chg": -5.72,
+      "_src": "eastmoney"
     },
     "中证红利": {
       "price": 5493.34,
-      "chg": 64.67,
       "chg_pct": 1.19,
-      "_prev": 5428.67,
-      "_src": "tencent"
+      "chg": 64.67,
+      "_src": "eastmoney"
     },
     "中证1000": {
       "price": 7298.82,
-      "chg": -26.53,
       "chg_pct": -0.36,
-      "_prev": 7325.35,
-      "_src": "tencent"
+      "chg": -26.53,
+      "_src": "eastmoney"
     },
     "国证2000": {
       "price": 9648.5,
-      "chg": -43.99,
       "chg_pct": -0.45,
-      "_prev": 9692.49,
-      "_src": "tencent"
+      "chg": -43.99,
+      "_src": "eastmoney"
     },
     "科创50": {
       "price": 1530.01,
-      "chg": -39.33,
       "chg_pct": -2.51,
-      "_prev": 1569.34,
-      "_src": "tencent"
+      "chg": -39.33,
+      "_src": "eastmoney"
     },
     "沪深300": {
       "price": 4357.62,
-      "chg": 12.41,
       "chg_pct": 0.29,
-      "_prev": 4345.21,
-      "_src": "tencent"
+      "chg": 12.41,
+      "_src": "eastmoney"
     }
   },
   "sectors": [
